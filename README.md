@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
+Vinayak:
+
 # Lab report \#1
 
 Follow the instructions posted at
