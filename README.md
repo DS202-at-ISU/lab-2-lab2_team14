@@ -102,6 +102,8 @@ head(ames)
 
 2.  Is there a variable of special interest or focus?
 
+For this model, We are focusing on Sale Price.
+
 3.  Start the exploration with the main variable. What is the range of
     the variable? Draw a histogram for a numeric variable or a bar
     chart, if the variable is categorical. What is the general pattern?
