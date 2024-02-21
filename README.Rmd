@@ -9,15 +9,6 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-Vinayak:
-```{r, include=FALSE}
-library(classdata)
-
-summary(ames)
-
-```
-
 # Lab report #1
 
 Follow the instructions posted at https://ds202-at-isu.github.io/labs.html for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
