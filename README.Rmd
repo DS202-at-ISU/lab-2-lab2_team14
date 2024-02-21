@@ -28,6 +28,8 @@ head(ames)
 
 2. Is there a variable of special interest or focus?
 
+ For this model, We are focusing on Sale Price.
+ 
 3. Start the exploration with the main variable. What is the range of the variable? Draw a histogram for a numeric variable or a bar chart, if the variable is categorical. What is the general pattern? Is there anything odd? Follow up on any oddities in step 4.
 
 4. Pick a variable that might be related to the main variable. What is the range of that variable? Plot/describe the pattern. What is it's relationship to the main variable? Plot a scatterplot, boxplot, or faceted barcharts (depending on the types of variables involved). Describe overall pattern, does this variable describe any oddities discovered in 3? Identify/follow-up on any oddities.
