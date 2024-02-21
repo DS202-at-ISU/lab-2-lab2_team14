@@ -23,82 +23,119 @@ you are done with your submission.
 
 ``` r
 library(classdata)
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+df = ames %>% filter(YearBuilt!=0) %>% filter(`LotArea(sf)`!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Sale Price`!=0) %>% filter(Bedrooms!=0)
+ames = df
 summary(ames)
 ```
 
     ##   Parcel ID           Address                        Style     
-    ##  Length:6935        Length:6935        1 Story Frame    :3732  
-    ##  Class :character   Class :character   2 Story Frame    :1456  
-    ##  Mode  :character   Mode  :character   1 1/2 Story Frame: 711  
-    ##                                        Split Level Frame: 215  
-    ##                                        Split Foyer Frame: 156  
-    ##                                        (Other)          : 218  
-    ##                                        NA's             : 447  
+    ##  Length:4275        Length:4275        1 Story Frame    :2486  
+    ##  Class :character   Class :character   2 Story Frame    : 979  
+    ##  Mode  :character   Mode  :character   1 1/2 Story Frame: 460  
+    ##                                        Split Level Frame: 140  
+    ##                                        Split Foyer Frame: 107  
+    ##                                        2 1/2 Story Frame:  57  
+    ##                                        (Other)          :  46  
     ##                           Occupancy      Sale Date            Sale Price      
-    ##  Condominium                   : 711   Min.   :2017-07-03   Min.   :       0  
-    ##  Single-Family / Owner Occupied:4711   1st Qu.:2019-03-27   1st Qu.:       0  
-    ##  Townhouse                     : 745   Median :2020-09-22   Median :  170900  
-    ##  Two-Family Conversion         : 139   Mean   :2020-06-14   Mean   : 1017479  
-    ##  Two-Family Duplex             : 182   3rd Qu.:2021-10-14   3rd Qu.:  280000  
-    ##  NA's                          : 447   Max.   :2022-08-31   Max.   :20500000  
+    ##  Condominium                   : 570   Min.   :2017-07-03   Min.   :       1  
+    ##  Single-Family / Owner Occupied:3108   1st Qu.:2019-04-16   1st Qu.:  172000  
+    ##  Townhouse                     : 428   Median :2020-10-14   Median :  235000  
+    ##  Two-Family Conversion         :  76   Mean   :2020-06-28   Mean   : 1612816  
+    ##  Two-Family Duplex             :  93   3rd Qu.:2021-11-08   3rd Qu.:  338425  
+    ##                                        Max.   :2022-08-31   Max.   :20500000  
     ##                                                                               
-    ##   Multi Sale          YearBuilt        Acres         TotalLivingArea (sf)
-    ##  Length:6935        Min.   :   0   Min.   : 0.0000   Min.   :   0        
-    ##  Class :character   1st Qu.:1956   1st Qu.: 0.1502   1st Qu.:1095        
-    ##  Mode  :character   Median :1978   Median : 0.2200   Median :1460        
-    ##                     Mean   :1976   Mean   : 0.2631   Mean   :1507        
-    ##                     3rd Qu.:2002   3rd Qu.: 0.2770   3rd Qu.:1792        
-    ##                     Max.   :2022   Max.   :12.0120   Max.   :6007        
-    ##                     NA's   :447    NA's   :89        NA's   :447         
+    ##   Multi Sale          YearBuilt        Acres        TotalLivingArea (sf)
+    ##  Length:4275        Min.   :1880   Min.   :0.0010   Min.   :   3        
+    ##  Class :character   1st Qu.:1957   1st Qu.:0.1380   1st Qu.:1108        
+    ##  Mode  :character   Median :1986   Median :0.2120   Median :1455        
+    ##                     Mean   :1979   Mean   :0.2359   Mean   :1504        
+    ##                     3rd Qu.:2004   3rd Qu.:0.2680   3rd Qu.:1756        
+    ##                     Max.   :2021   Max.   :4.6500   Max.   :6007        
+    ##                                                                         
     ##     Bedrooms      FinishedBsmtArea (sf)  LotArea(sf)          AC           
-    ##  Min.   : 0.000   Min.   :  10.0        Min.   :     0   Length:6935       
-    ##  1st Qu.: 3.000   1st Qu.: 474.0        1st Qu.:  6553   Class :character  
-    ##  Median : 3.000   Median : 727.0        Median :  9575   Mode  :character  
-    ##  Mean   : 3.299   Mean   : 776.7        Mean   : 11466                     
-    ##  3rd Qu.: 4.000   3rd Qu.:1011.0        3rd Qu.: 12088                     
-    ##  Max.   :10.000   Max.   :6496.0        Max.   :523228                     
-    ##  NA's   :447      NA's   :2682          NA's   :89                         
+    ##  Min.   : 1.000   Min.   :  16.0        Min.   :    63   Length:4275       
+    ##  1st Qu.: 3.000   1st Qu.: 480.0        1st Qu.:  6002   Class :character  
+    ##  Median : 3.000   Median : 725.0        Median :  9240   Mode  :character  
+    ##  Mean   : 3.326   Mean   : 766.2        Mean   : 10272                     
+    ##  3rd Qu.: 4.000   3rd Qu.:1000.0        3rd Qu.: 11667                     
+    ##  Max.   :10.000   Max.   :2537.0        Max.   :202554                     
+    ##                   NA's   :1537                                             
     ##   FirePlace                            Neighborhood 
-    ##  Length:6935        (27) Res: N Ames         : 854  
-    ##  Class :character   (37) Res: College Creek  : 652  
-    ##  Mode  :character   (57) Res: Investor Owned : 474  
-    ##                     (29) Res: Old Town       : 469  
-    ##                     (34) Res: Edwards        : 444  
-    ##                     (19) Res: North Ridge Hei: 420  
-    ##                     (Other)                  :3622
+    ##  Length:4275        (27) Res: N Ames         : 507  
+    ##  Class :character   (37) Res: College Creek  : 502  
+    ##  Mode  :character   (57) Res: Investor Owned : 417  
+    ##                     (29) Res: Old Town       : 285  
+    ##                     (34) Res: Edwards        : 270  
+    ##                     (19) Res: North Ridge Hei: 215  
+    ##                     (Other)                  :2079
 
 ``` r
 head(ames)
 ```
 
-    ##    Parcel ID                       Address             Style
-    ## 1 0903202160      1024 RIDGEWOOD AVE, AMES 1 1/2 Story Frame
-    ## 2 0907428215 4503 TWAIN CIR UNIT 105, AMES     1 Story Frame
-    ## 3 0909428070        2030 MCCARTHY RD, AMES     1 Story Frame
-    ## 4 0923203160         3404 EMERALD DR, AMES     1 Story Frame
-    ## 5 0520440010       4507 EVEREST  AVE, AMES              <NA>
-    ## 6 0907275030       4512 HEMINGWAY DR, AMES     2 Story Frame
-    ##                        Occupancy  Sale Date Sale Price Multi Sale YearBuilt
-    ## 1 Single-Family / Owner Occupied 2022-08-12     181900       <NA>      1940
-    ## 2                    Condominium 2022-08-04     127100       <NA>      2006
-    ## 3 Single-Family / Owner Occupied 2022-08-15          0       <NA>      1951
-    ## 4                      Townhouse 2022-08-09     245000       <NA>      1997
-    ## 5                           <NA> 2022-08-03     449664       <NA>        NA
-    ## 6 Single-Family / Owner Occupied 2022-08-16     368000       <NA>      1996
-    ##   Acres TotalLivingArea (sf) Bedrooms FinishedBsmtArea (sf) LotArea(sf)  AC
-    ## 1 0.109                 1030        2                    NA        4740 Yes
-    ## 2 0.027                  771        1                    NA        1181 Yes
-    ## 3 0.321                 1456        3                  1261       14000 Yes
-    ## 4 0.103                 1289        4                   890        4500 Yes
-    ## 5 0.287                   NA       NA                    NA       12493  No
-    ## 6 0.494                 2223        4                    NA       21533 Yes
-    ##   FirePlace              Neighborhood
-    ## 1       Yes       (28) Res: Brookside
-    ## 2        No    (55) Res: Dakota Ridge
-    ## 3        No        (32) Res: Crawford
-    ## 4        No        (31) Res: Mitchell
-    ## 5        No (19) Res: North Ridge Hei
-    ## 6       Yes   (37) Res: College Creek
+    ## # A tibble: 6 × 16
+    ##   `Parcel ID` Address      Style Occupancy `Sale Date` `Sale Price` `Multi Sale`
+    ##   <chr>       <chr>        <fct> <fct>     <date>             <dbl> <chr>       
+    ## 1 0903202160  1024 RIDGEW… 1 1/… Single-F… 2022-08-12        181900 <NA>        
+    ## 2 0907428215  4503 TWAIN … 1 St… Condomin… 2022-08-04        127100 <NA>        
+    ## 3 0923203160  3404 EMERAL… 1 St… Townhouse 2022-08-09        245000 <NA>        
+    ## 4 0907275030  4512 HEMING… 2 St… Single-F… 2022-08-16        368000 <NA>        
+    ## 5 0907428446  4510 TWAIN … 1 St… Condomin… 2022-08-16        110000 <NA>        
+    ## 6 0527301030  3409 EISENH… 1 St… Single-F… 2022-08-08        350000 <NA>        
+    ## # ℹ 9 more variables: YearBuilt <dbl>, Acres <dbl>,
+    ## #   `TotalLivingArea (sf)` <dbl>, Bedrooms <dbl>,
+    ## #   `FinishedBsmtArea (sf)` <dbl>, `LotArea(sf)` <dbl>, AC <chr>,
+    ## #   FirePlace <chr>, Neighborhood <fct>
+
+``` r
+str(ames)
+```
+
+    ## tibble [4,275 × 16] (S3: tbl_df/tbl/data.frame)
+    ##  $ Parcel ID            : chr [1:4275] "0903202160" "0907428215" "0923203160" "0907275030" ...
+    ##  $ Address              : chr [1:4275] "1024 RIDGEWOOD AVE, AMES" "4503 TWAIN CIR UNIT 105, AMES" "3404 EMERALD DR, AMES" "4512 HEMINGWAY DR, AMES" ...
+    ##  $ Style                : Factor w/ 12 levels "1 1/2 Story Brick",..: 2 5 5 9 5 5 5 9 5 5 ...
+    ##  $ Occupancy            : Factor w/ 5 levels "Condominium",..: 2 1 3 2 1 2 2 2 5 2 ...
+    ##  $ Sale Date            : Date[1:4275], format: "2022-08-12" "2022-08-04" ...
+    ##  $ Sale Price           : num [1:4275] 181900 127100 245000 368000 110000 ...
+    ##  $ Multi Sale           : chr [1:4275] NA NA NA NA ...
+    ##  $ YearBuilt            : num [1:4275] 1940 2006 1997 1996 2006 ...
+    ##  $ Acres                : num [1:4275] 0.109 0.027 0.103 0.494 0.023 0.285 0.172 0.297 0.196 0.239 ...
+    ##  $ TotalLivingArea (sf) : num [1:4275] 1030 771 1289 2223 658 ...
+    ##  $ Bedrooms             : num [1:4275] 2 1 4 4 1 3 4 4 2 3 ...
+    ##  $ FinishedBsmtArea (sf): num [1:4275] NA NA 890 NA NA NA 500 593 NA 929 ...
+    ##  $ LotArea(sf)          : num [1:4275] 4740 1181 4500 21533 1008 ...
+    ##  $ AC                   : chr [1:4275] "Yes" "Yes" "Yes" "Yes" ...
+    ##  $ FirePlace            : chr [1:4275] "Yes" "No" "No" "Yes" ...
+    ##  $ Neighborhood         : Factor w/ 42 levels "(0) None","(13) Apts: Campus",..: 15 40 18 24 40 13 23 13 14 13 ...
+
+The variables of the data set are: Parcel ID, Address, Style, Occupancy,
+Sale Date, Sale Price, Multi Sale, YearBuilt, Acres, TotalLivingArea
+(sf), Bedrooms, FinishedBsmtArea (sf), LotArea(sf), AC, FirePlace, and
+Neighborhood. That makes 17 variables. Parcel ID is of type chr, and is
+a 10 digit number providing a unique ID to each residence. Address is of
+type chr, and is a string representing the location of the residence.
+Style is of type Factor, and represents the general size of the
+residence in stories. Occupancy is of type Factor, and represents the
+type of residence, such as Townhouse or Condominium. Sale date is of
+type date, represents the date the residence was sold, and go from
+2017-07-03 to 2022-08-31. Sale price is of type num, represents the USD
+cost of the residence, and ranges from \$1 to \$20,500,000.
 
 2.  Is there a variable of special interest or focus?
 
