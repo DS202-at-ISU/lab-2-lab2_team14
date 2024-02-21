@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
+Vinayak:
+
 # Lab report \#1
 
 Follow the instructions posted at
@@ -138,6 +140,8 @@ type date, represents the date the residence was sold, and go from
 cost of the residence, and ranges from \$1 to \$20,500,000.
 
 2.  Is there a variable of special interest or focus?
+
+For this model, We are focusing on Sale Price.
 
 3.  Start the exploration with the main variable. What is the range of
     the variable? Draw a histogram for a numeric variable or a bar
