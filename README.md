@@ -1,8 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit the README.Rmd file -->
 
-Vinayak:
-
 # Lab report \#1
 
 Follow the instructions posted at
@@ -129,15 +127,20 @@ str(ames)
 The variables of the data set are: Parcel ID, Address, Style, Occupancy,
 Sale Date, Sale Price, Multi Sale, YearBuilt, Acres, TotalLivingArea
 (sf), Bedrooms, FinishedBsmtArea (sf), LotArea(sf), AC, FirePlace, and
-Neighborhood. That makes 17 variables. Parcel ID is of type chr, and is
-a 10 digit number providing a unique ID to each residence. Address is of
-type chr, and is a string representing the location of the residence.
+Neighborhood. That makes 17 variables, and we removed the rows with
+strange values of 0 for certain variables. Parcel ID is of type chr, and
+is a 10 digit number providing a unique ID to each residence. Address is
+of type chr, and is a string representing the location of the residence.
 Style is of type Factor, and represents the general size of the
 residence in stories. Occupancy is of type Factor, and represents the
 type of residence, such as Townhouse or Condominium. Sale date is of
 type date, represents the date the residence was sold, and go from
 2017-07-03 to 2022-08-31. Sale price is of type num, represents the USD
-cost of the residence, and ranges from \$1 to \$20,500,000.
+cost of the residence, and ranges from \$1 to \$20,500,000. Multi Sale
+is of type chr, and represents if the residence sale occurred with
+others. Most of these values are NA. YearBuilt is of type num,
+represents the year the residence was built, and ranges from 1880 to
+2021.
 
 2.  Is there a variable of special interest or focus?
 
@@ -154,3 +157,6 @@ For this model, We are focusing on Sale Price.
     faceted barcharts (depending on the types of variables involved).
     Describe overall pattern, does this variable describe any oddities
     discovered in 3? Identify/follow-up on any oddities.
+
+Vinayak: I am doing the TotalLivingArea (sf) The range of this variable
+is:
