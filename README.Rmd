@@ -47,6 +47,12 @@ head(ames)
 Vinayak: I am doing the TotalLivingArea (sf)
 The range of this variable is:
 ```{r, include=FALSE}
-max(ames$`TotalLivingArea (sf)`)
-min(ames$`TotalLivingArea (sf)`)
+library(tidyverse)
+max(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
+min(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
+
+ggplot(data = ames, aes(x = 'TotalLivingArea (sf)')) + geom_bar()
+
 ```
+Relationship to the main variable:
+
