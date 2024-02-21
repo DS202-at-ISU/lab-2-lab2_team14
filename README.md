@@ -115,3 +115,6 @@ For this model, We are focusing on Sale Price.
     faceted barcharts (depending on the types of variables involved).
     Describe overall pattern, does this variable describe any oddities
     discovered in 3? Identify/follow-up on any oddities.
+
+Niraj: I am choosing the YearBulit variable as my secondary variable to
+explore with sales variable. The range of YearBuild variable is 2022.
