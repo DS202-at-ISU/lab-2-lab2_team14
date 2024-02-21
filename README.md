@@ -137,7 +137,7 @@ residence in stories. Occupancy is of type Factor, and represents the
 type of residence, such as Townhouse or Condominium. Sale date is of
 type date, represents the date the residence was sold, and go from
 2017-07-03 to 2022-08-31. Sale price is of type num, represents the USD
-cost of the residence, and ranges from \$1 to \$20,500,000.
+cost of the residence, and ranges from \$1 to \$20,500,000. Multi Sale
 
 2.  Is there a variable of special interest or focus?
 
@@ -154,3 +154,6 @@ For this model, We are focusing on Sale Price.
     faceted barcharts (depending on the types of variables involved).
     Describe overall pattern, does this variable describe any oddities
     discovered in 3? Identify/follow-up on any oddities.
+
+Vinayak: I am doing the TotalLivingArea (sf) The range of this variable
+is:
