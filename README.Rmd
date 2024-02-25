@@ -72,3 +72,37 @@ ggplot(data = ames, aes(x = 'TotalLivingArea (sf)')) + geom_bar()
 ```
 Relationship to the main variable:
 
+
+Zane: I am choosing the Acres variable.
+
+```{r}
+max(ames$Acres, na.rm=TRUE)
+min(ames$Acres, na.rm=TRUE)
+mean(ames$Acres, na.rm=TRUE)
+ggplot(ames, aes(x = Acres)) + 
+  geom_histogram(binwidth=0.1) +
+  ggtitle("binwidth = 0.1")
+```
+
+The distribution is heavily skewed right, with a minimum of 0.001 acres and a maximum of 4.65 acres. The mean acreage is 0.236.
+
+```{r}
+ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
+  geom_point()
+```
+
+Let's filter out some of the outliers with high prices and low acreage.
+
+```{r}
+alt = ames %>% filter(`Sale Price` < 10000000)
+ggplot(alt, aes(x = Acres, y = `Sale Price`)) +
+  geom_point()
+```
+
+The majority of the residences in the scatterplot are clustered with low acreage and low to medium price. There is no clear correlation due to the extreme density of points. However, we can tell that it is a positive correlation between acreage and sale price.
+
+
+
+
+
+

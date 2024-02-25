@@ -182,9 +182,62 @@ variable.
     discovered in 3? Identify/follow-up on any oddities.
 
 Niraj: I am choosing the YearBulit variable as my secondary variable to
-explore with sales variable. The range of YearBuild variable is 2022.
+explore with sales variable.
 
 Vinayak: I am doing the TotalLivingArea (sf) The range of this variable
 is:
 
 Relationship to the main variable:
+
+Zane: I am choosing the Acres variable.
+
+``` r
+max(ames$Acres, na.rm=TRUE)
+```
+
+    ## [1] 4.65
+
+``` r
+min(ames$Acres, na.rm=TRUE)
+```
+
+    ## [1] 0.001
+
+``` r
+mean(ames$Acres, na.rm=TRUE)
+```
+
+    ## [1] 0.2358634
+
+``` r
+ggplot(ames, aes(x = Acres)) + 
+  geom_histogram(binwidth=0.1) +
+  ggtitle("binwidth = 0.1")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+The distribution is heavily skewed right, with a minimum of 0.001 acres
+and a maximum of 4.65 acres. The mean acreage is 0.236.
+
+``` r
+ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
+  geom_point()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+Let’s filter out some of the outliers.
+
+``` r
+alt = ames %>% filter(`Sale Price` < 10000000)
+ggplot(alt, aes(x = Acres, y = `Sale Price`)) +
+  geom_point()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+The majority of the residences in the scatterplot are clustered with low
+acreage and low to medium price. There is no clear correlation due to
+the extreme density of points. However, we can tell that it is a
+positive correlation between acreage and sale price.
