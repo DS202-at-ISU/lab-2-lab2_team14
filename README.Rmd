@@ -119,14 +119,21 @@ Vinayak: I am doing the TotalLivingArea (sf)
 The range of this variable is:
 ```{r, include=FALSE}
 library(tidyverse)
+library(ggplot2)
 max(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
 min(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
 
-ggplot(data = ames, aes(x = 'TotalLivingArea (sf)')) + geom_bar()
+ggplot(ames, aes(x = `TotalLivingArea (sf)`)) + geom_bar() + coord_flip()
 
 ```
 Relationship to the main variable:
+```{r, include=FALSE}
+library(tidyverse)
+ggplot(data = ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`, alpha = 0.2)) + geom_point()
 
+```
+
+Sale Price increases as Total Living Area increases, we see that there are few properties with a living area above 4000 sf, and there is only one property above $1000000. Most properties an area of fewer than 2000 sf. Sale Price and TotalLivingArea have a mostly linear relationship. There aren't any oddities between Sale Price and TotalLivingArea.
 
 Zane: I am choosing the Acres variable.
 
