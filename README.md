@@ -6,6 +6,8 @@
 **TL;DR** Sales price is the most important variable, and follows a
 linear relationship with Total Living Area. Acres and Sales Price also
 follow a linear relationship, albeit with a much lower strength.
+Occupancy does have a slight effect on the Sales Price, but it doesn’t
+appear to be as significant as other explanatory variables.
 
 Follow the instructions posted at
 <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The
