@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Lab report #1
 
+**TL;DR** Sales price is the most important variable, and follows a linear relationship with Total Living Area. Acres and Sales Price also follow a linear relationship, albeit with a much lower strength.
+
 Follow the instructions posted at https://ds202-at-isu.github.io/labs.html for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 
 Include your answers in this document (Rmd file). Make sure that it knits properly (into the md file). Upload both the Rmd and the md file to your repository.  
@@ -108,27 +110,25 @@ The main variable "Sale Price" ranges from 1 to 20.5 million dollars. When looki
 
 Niraj: I am choosing the YearBulit variable as my secondary variable to explore with sales variable. 
 
-```{r, include=FALSE}
-library(tidyverse)
-max(ames$`YearBuild (sf)`, na.rm = TRUE)
-min(ames$`YearBuild (sf)`, na.rm = TRUE)
-ggplot(data = ames, aes(x = 'YearBuild (sf)')) + geom_bar()
+```{r}
+max(ames$`YearBuilt`, na.rm = TRUE)
+min(ames$`YearBuilt`, na.rm = TRUE)
+ggplot(data = ames, aes(x = 'YearBuilt')) + geom_bar()
 
 ```
+
 Vinayak: I am doing the TotalLivingArea (sf)
 The range of this variable is:
-```{r, include=FALSE}
-library(tidyverse)
-library(ggplot2)
+```{r}
 max(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
 min(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
 
 ggplot(ames, aes(x = `TotalLivingArea (sf)`)) + geom_bar() + coord_flip()
 
 ```
+
 Relationship to the main variable:
-```{r, include=FALSE}
-library(tidyverse)
+```{r}
 ggplot(data = ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`, alpha = 0.2)) + geom_point()
 
 ```
@@ -146,22 +146,14 @@ ggplot(ames, aes(x = Acres)) +
   ggtitle("binwidth = 0.1")
 ```
 
-The distribution is heavily skewed right, with a minimum of 0.001 acres and a maximum of 4.65 acres. The mean acreage is 0.236.
+The distribution is heavily skewed right, with a minimum of 0.024 acres and a maximum of 4.65 acres. The mean acreage is 0.266.
 
 ```{r}
-ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
+ggplot(ames, aes(x = Acres, y = `Sale Price`, alpha = 0.2)) +
   geom_point()
 ```
 
-Let's filter out some of the outliers with high prices and low acreage.
-
-```{r}
-alt = ames %>% filter(`Sale Price` < 10000000)
-ggplot(alt, aes(x = Acres, y = `Sale Price`)) +
-  geom_point()
-```
-
-The majority of the residences in the scatterplot are clustered with low acreage and low to medium price. There is no clear correlation due to the extreme density of points. However, we can tell that it is a positive correlation between acreage and sale price.
+The majority of the residences in the scatterplot are clustered with low acreage and low to medium price. There is no clear correlation due to the extreme density of points. However, we can tell that there is a positive correlation between acreage and sale price.There are no obvious oddities between acreage and sale price.
 
 
 Ryan: I will look at Occupancy.

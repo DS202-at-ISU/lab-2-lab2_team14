@@ -3,6 +3,10 @@
 
 # Lab report \#1
 
+**TL;DR** Sales price is the most important variable, and follows a
+linear relationship with Total Living Area. Acres and Sales Price also
+follow a linear relationship, albeit with a much lower strength.
+
 Follow the instructions posted at
 <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The
 work is meant to be finished during the lab time, but you have time
@@ -39,51 +43,51 @@ library(dplyr)
     ##     intersect, setdiff, setequal, union
 
 ``` r
-df = ames %>% filter(YearBuilt!=0) %>% filter(`LotArea(sf)`!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Sale Price`!=0) %>% filter(Bedrooms!=0)
+df = ames %>% filter(YearBuilt!=0) %>% filter(`LotArea(sf)`!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Sale Price`!=0) %>% filter(Bedrooms!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Bedrooms` != 0) %>% filter(`FinishedBsmtArea (sf)`!=0) %>% filter(AC != 0) %>% filter(FirePlace != 0) %>% filter(Neighborhood != 0)
 ames = df
 summary(ames)
 ```
 
     ##   Parcel ID           Address                        Style     
-    ##  Length:4275        Length:4275        1 Story Frame    :2486  
-    ##  Class :character   Class :character   2 Story Frame    : 979  
-    ##  Mode  :character   Mode  :character   1 1/2 Story Frame: 460  
-    ##                                        Split Level Frame: 140  
-    ##                                        Split Foyer Frame: 107  
-    ##                                        2 1/2 Story Frame:  57  
-    ##                                        (Other)          :  46  
-    ##                           Occupancy      Sale Date            Sale Price      
-    ##  Condominium                   : 570   Min.   :2017-07-03   Min.   :       1  
-    ##  Single-Family / Owner Occupied:3108   1st Qu.:2019-04-16   1st Qu.:  172000  
-    ##  Townhouse                     : 428   Median :2020-10-14   Median :  235000  
-    ##  Two-Family Conversion         :  76   Mean   :2020-06-28   Mean   : 1612816  
-    ##  Two-Family Duplex             :  93   3rd Qu.:2021-11-08   3rd Qu.:  338425  
-    ##                                        Max.   :2022-08-31   Max.   :20500000  
-    ##                                                                               
-    ##   Multi Sale          YearBuilt        Acres        TotalLivingArea (sf)
-    ##  Length:4275        Min.   :1880   Min.   :0.0010   Min.   :   3        
-    ##  Class :character   1st Qu.:1957   1st Qu.:0.1380   1st Qu.:1108        
-    ##  Mode  :character   Median :1986   Median :0.2120   Median :1455        
-    ##                     Mean   :1979   Mean   :0.2359   Mean   :1504        
-    ##                     3rd Qu.:2004   3rd Qu.:0.2680   3rd Qu.:1756        
-    ##                     Max.   :2021   Max.   :4.6500   Max.   :6007        
-    ##                                                                         
+    ##  Length:2738        Length:2738        1 Story Frame    :1569  
+    ##  Class :character   Class :character   2 Story Frame    : 637  
+    ##  Mode  :character   Mode  :character   1 1/2 Story Frame: 237  
+    ##                                        Split Level Frame: 126  
+    ##                                        Split Foyer Frame: 106  
+    ##                                        1 Story Brick    :  28  
+    ##                                        (Other)          :  35  
+    ##                           Occupancy      Sale Date            Sale Price     
+    ##  Condominium                   :   5   Min.   :2017-07-03   Min.   :      1  
+    ##  Single-Family / Owner Occupied:2289   1st Qu.:2019-01-30   1st Qu.: 180800  
+    ##  Townhouse                     : 347   Median :2020-07-23   Median : 235000  
+    ##  Two-Family Conversion         :  46   Mean   :2020-04-11   Mean   : 257205  
+    ##  Two-Family Duplex             :  51   3rd Qu.:2021-07-19   3rd Qu.: 317000  
+    ##                                        Max.   :2022-08-31   Max.   :1200000  
+    ##                                                                              
+    ##   Multi Sale          YearBuilt        Acres       TotalLivingArea (sf)
+    ##  Length:2738        Min.   :1890   Min.   :0.024   Min.   :   3        
+    ##  Class :character   1st Qu.:1960   1st Qu.:0.184   1st Qu.:1146        
+    ##  Mode  :character   Median :1979   Median :0.228   Median :1498        
+    ##                     Mean   :1980   Mean   :0.266   Mean   :1547        
+    ##                     3rd Qu.:2005   3rd Qu.:0.285   3rd Qu.:1793        
+    ##                     Max.   :2021   Max.   :4.650   Max.   :6007        
+    ##                                                                        
     ##     Bedrooms      FinishedBsmtArea (sf)  LotArea(sf)          AC           
-    ##  Min.   : 1.000   Min.   :  16.0        Min.   :    63   Length:4275       
-    ##  1st Qu.: 3.000   1st Qu.: 480.0        1st Qu.:  6002   Class :character  
-    ##  Median : 3.000   Median : 725.0        Median :  9240   Mode  :character  
-    ##  Mean   : 3.326   Mean   : 766.2        Mean   : 10272                     
-    ##  3rd Qu.: 4.000   3rd Qu.:1000.0        3rd Qu.: 11667                     
+    ##  Min.   : 1.000   Min.   :  16.0        Min.   :  1037   Length:2738       
+    ##  1st Qu.: 3.000   1st Qu.: 480.0        1st Qu.:  8020   Class :character  
+    ##  Median : 4.000   Median : 725.0        Median :  9912   Mode  :character  
+    ##  Mean   : 3.575   Mean   : 766.2        Mean   : 11585                     
+    ##  3rd Qu.: 4.000   3rd Qu.:1000.0        3rd Qu.: 12400                     
     ##  Max.   :10.000   Max.   :2537.0        Max.   :202554                     
-    ##                   NA's   :1537                                             
+    ##                                                                            
     ##   FirePlace                            Neighborhood 
-    ##  Length:4275        (27) Res: N Ames         : 507  
-    ##  Class :character   (37) Res: College Creek  : 502  
-    ##  Mode  :character   (57) Res: Investor Owned : 417  
-    ##                     (29) Res: Old Town       : 285  
-    ##                     (34) Res: Edwards        : 270  
-    ##                     (19) Res: North Ridge Hei: 215  
-    ##                     (Other)                  :2079
+    ##  Length:2738        (27) Res: N Ames         : 423  
+    ##  Class :character   (37) Res: College Creek  : 368  
+    ##  Mode  :character   (19) Res: North Ridge Hei: 184  
+    ##                     (34) Res: Edwards        : 183  
+    ##                     (26) Res: NW Ames        : 138  
+    ##                     (31) Res: Mitchell       : 132  
+    ##                     (Other)                  :1310
 
 ``` r
 head(ames)
@@ -92,12 +96,12 @@ head(ames)
     ## # A tibble: 6 × 16
     ##   `Parcel ID` Address      Style Occupancy `Sale Date` `Sale Price` `Multi Sale`
     ##   <chr>       <chr>        <fct> <fct>     <date>             <dbl> <chr>       
-    ## 1 0903202160  1024 RIDGEW… 1 1/… Single-F… 2022-08-12        181900 <NA>        
-    ## 2 0907428215  4503 TWAIN … 1 St… Condomin… 2022-08-04        127100 <NA>        
-    ## 3 0923203160  3404 EMERAL… 1 St… Townhouse 2022-08-09        245000 <NA>        
-    ## 4 0907275030  4512 HEMING… 2 St… Single-F… 2022-08-16        368000 <NA>        
-    ## 5 0907428446  4510 TWAIN … 1 St… Condomin… 2022-08-16        110000 <NA>        
-    ## 6 0527301030  3409 EISENH… 1 St… Single-F… 2022-08-08        350000 <NA>        
+    ## 1 0923203160  3404 EMERAL… 1 St… Townhouse 2022-08-09        245000 <NA>        
+    ## 2 0531363050  5426 KANSAS… 1 St… Single-F… 2022-08-03        242000 <NA>        
+    ## 3 0534128100  1607 PIERCE… 2 St… Single-F… 2022-08-03        293000 <NA>        
+    ## 4 0527354040  2006 POLK D… 1 St… Single-F… 2022-08-19        341100 <NA>        
+    ## 5 0533252180  2835 TORREY… 1 St… Single-F… 2022-08-18        515000 <NA>        
+    ## 6 0527454090  1107 JOHNSO… 1 St… Townhouse 2022-08-11        205000 <NA>        
     ## # ℹ 9 more variables: YearBuilt <dbl>, Acres <dbl>,
     ## #   `TotalLivingArea (sf)` <dbl>, Bedrooms <dbl>,
     ## #   `FinishedBsmtArea (sf)` <dbl>, `LotArea(sf)` <dbl>, AC <chr>,
@@ -107,23 +111,155 @@ head(ames)
 str(ames)
 ```
 
-    ## tibble [4,275 × 16] (S3: tbl_df/tbl/data.frame)
-    ##  $ Parcel ID            : chr [1:4275] "0903202160" "0907428215" "0923203160" "0907275030" ...
-    ##  $ Address              : chr [1:4275] "1024 RIDGEWOOD AVE, AMES" "4503 TWAIN CIR UNIT 105, AMES" "3404 EMERALD DR, AMES" "4512 HEMINGWAY DR, AMES" ...
-    ##  $ Style                : Factor w/ 12 levels "1 1/2 Story Brick",..: 2 5 5 9 5 5 5 9 5 5 ...
-    ##  $ Occupancy            : Factor w/ 5 levels "Condominium",..: 2 1 3 2 1 2 2 2 5 2 ...
-    ##  $ Sale Date            : Date[1:4275], format: "2022-08-12" "2022-08-04" ...
-    ##  $ Sale Price           : num [1:4275] 181900 127100 245000 368000 110000 ...
-    ##  $ Multi Sale           : chr [1:4275] NA NA NA NA ...
-    ##  $ YearBuilt            : num [1:4275] 1940 2006 1997 1996 2006 ...
-    ##  $ Acres                : num [1:4275] 0.109 0.027 0.103 0.494 0.023 0.285 0.172 0.297 0.196 0.239 ...
-    ##  $ TotalLivingArea (sf) : num [1:4275] 1030 771 1289 2223 658 ...
-    ##  $ Bedrooms             : num [1:4275] 2 1 4 4 1 3 4 4 2 3 ...
-    ##  $ FinishedBsmtArea (sf): num [1:4275] NA NA 890 NA NA NA 500 593 NA 929 ...
-    ##  $ LotArea(sf)          : num [1:4275] 4740 1181 4500 21533 1008 ...
-    ##  $ AC                   : chr [1:4275] "Yes" "Yes" "Yes" "Yes" ...
-    ##  $ FirePlace            : chr [1:4275] "Yes" "No" "No" "Yes" ...
-    ##  $ Neighborhood         : Factor w/ 42 levels "(0) None","(13) Apts: Campus",..: 15 40 18 24 40 13 23 13 14 13 ...
+    ## tibble [2,738 × 16] (S3: tbl_df/tbl/data.frame)
+    ##  $ Parcel ID            : chr [1:2738] "0923203160" "0531363050" "0534128100" "0527354040" ...
+    ##  $ Address              : chr [1:2738] "3404 EMERALD DR, AMES" "5426 KANSAS DR, AMES" "1607 PIERCE CIR, AMES" "2006 POLK DR, AMES" ...
+    ##  $ Style                : Factor w/ 12 levels "1 1/2 Story Brick",..: 5 5 9 5 5 5 9 9 9 11 ...
+    ##  $ Occupancy            : Factor w/ 5 levels "Condominium",..: 3 2 2 2 2 3 2 2 2 2 ...
+    ##  $ Sale Date            : Date[1:2738], format: "2022-08-09" "2022-08-03" ...
+    ##  $ Sale Price           : num [1:2738] 245000 242000 293000 341100 515000 ...
+    ##  $ Multi Sale           : chr [1:2738] NA NA NA NA ...
+    ##  $ YearBuilt            : num [1:2738] 1997 2004 1972 1988 2015 ...
+    ##  $ Acres                : num [1:2738] 0.103 0.172 0.297 0.239 0.325 0.057 0.143 0.23 0.237 0.251 ...
+    ##  $ TotalLivingArea (sf) : num [1:2738] 1289 1158 1429 1872 1696 ...
+    ##  $ Bedrooms             : num [1:2738] 4 4 4 3 4 2 3 4 4 4 ...
+    ##  $ FinishedBsmtArea (sf): num [1:2738] 890 500 593 929 858 711 404 580 143 938 ...
+    ##  $ LotArea(sf)          : num [1:2738] 4500 7500 12936 10400 14162 ...
+    ##  $ AC                   : chr [1:2738] "Yes" "Yes" "Yes" "Yes" ...
+    ##  $ FirePlace            : chr [1:2738] "No" "No" "Yes" "Yes" ...
+    ##  $ Neighborhood         : Factor w/ 42 levels "(0) None","(13) Apts: Campus",..: 18 23 13 13 8 27 17 10 17 22 ...
+
+``` r
+class(df$Acres)
+```
+
+    ## [1] "numeric"
+
+``` r
+min(df$Acres)
+```
+
+    ## [1] 0.024
+
+``` r
+max(df$Acres)
+```
+
+    ## [1] 4.65
+
+``` r
+class(df$`TotalLivingArea (sf)`)
+```
+
+    ## [1] "numeric"
+
+``` r
+min(df$`TotalLivingArea (sf)`)
+```
+
+    ## [1] 3
+
+``` r
+max(df$`TotalLivingArea (sf)`)
+```
+
+    ## [1] 6007
+
+``` r
+class(df$Bedrooms)
+```
+
+    ## [1] "numeric"
+
+``` r
+min(df$Bedrooms)
+```
+
+    ## [1] 1
+
+``` r
+max(df$Bedrooms)
+```
+
+    ## [1] 10
+
+``` r
+class(df$`FinishedBsmtArea (sf)`)
+```
+
+    ## [1] "numeric"
+
+``` r
+min(df$`FinishedBsmtArea (sf)`)
+```
+
+    ## [1] 16
+
+``` r
+max(df$`FinishedBsmtArea (sf)`)
+```
+
+    ## [1] 2537
+
+``` r
+class(df$`LotArea(sf)`)
+```
+
+    ## [1] "numeric"
+
+``` r
+min(df$`LotArea(sf)`)
+```
+
+    ## [1] 1037
+
+``` r
+max(df$`LotArea(sf)`)
+```
+
+    ## [1] 202554
+
+``` r
+class(df$AC)
+```
+
+    ## [1] "character"
+
+``` r
+min(df$AC)
+```
+
+    ## [1] "No"
+
+``` r
+max(df$AC)
+```
+
+    ## [1] "Yes"
+
+``` r
+class(df$FirePlace)
+```
+
+    ## [1] "character"
+
+``` r
+min(df$FirePlace)
+```
+
+    ## [1] "No"
+
+``` r
+max(df$FirePlace)
+```
+
+    ## [1] "Yes"
+
+``` r
+class(df$Neighborhood)
+```
+
+    ## [1] "factor"
 
 The variables of the data set are: Parcel ID, Address, Style, Occupancy,
 Sale Date, Sale Price, Multi Sale, YearBuilt, Acres, TotalLivingArea
@@ -142,6 +278,19 @@ is of type chr, and represents if the residence sale occurred with
 others. Most of these values are NA. YearBuilt is of type num,
 represents the year the residence was built, and ranges from 1880 to
 2021.
+
+Acres represents the acerage of the properties, is of type ‘double’ and
+ranges from 0.001 to 4.65. TotalLivingArea represents the living area of
+the properties, is of type ‘double’ and ranges from 3 to 6007 sf.
+Bedrooms represents the number of bedrooms per property, is of type
+‘double’, and ranges from 1 to 10. FinishedBsmtArea represents the
+basement area of each property, is of type ‘double’, and ranges from 16
+to 2537 sf. LotArea represents the lot area of each property, is of type
+‘double’, and ranges from 1037 to 202554. AC represents whether or not
+there is an AC in the property, is of type ‘character’, and is either No
+or Yes. Fireplace represents whether or not there is a fireplace on the
+property, is of type ‘character’, and is either Yes or No. Neighborhood
+represents the neighborhood of the property and is of type ‘factor’.
 
 2.  Is there a variable of special interest or focus?
 
@@ -162,7 +311,7 @@ min(ames$'Sale Price')
 max(ames$'Sale Price')
 ```
 
-    ## [1] 20500000
+    ## [1] 1200000
 
 ``` r
 options(scipen = 999) # Option to prevent scientific notation
@@ -197,10 +346,58 @@ to match, leaving us with a lot of empty space in the plot.
 Niraj: I am choosing the YearBulit variable as my secondary variable to
 explore with sales variable.
 
+``` r
+max(ames$`YearBuilt`, na.rm = TRUE)
+```
+
+    ## [1] 2021
+
+``` r
+min(ames$`YearBuilt`, na.rm = TRUE)
+```
+
+    ## [1] 1890
+
+``` r
+ggplot(data = ames, aes(x = 'YearBuilt')) + geom_bar()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
 Vinayak: I am doing the TotalLivingArea (sf) The range of this variable
 is:
 
+``` r
+max(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
+```
+
+    ## [1] 6007
+
+``` r
+min(ames$`TotalLivingArea (sf)`, na.rm = TRUE)
+```
+
+    ## [1] 3
+
+``` r
+ggplot(ames, aes(x = `TotalLivingArea (sf)`)) + geom_bar() + coord_flip()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
 Relationship to the main variable:
+
+``` r
+ggplot(data = ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`, alpha = 0.2)) + geom_point()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+Sale Price increases as Total Living Area increases, we see that there
+are few properties with a living area above 4000 sf, and there is only
+one property above \$1000000. Most properties an area of fewer than 2000
+sf. Sale Price and TotalLivingArea have a mostly linear relationship.
+There aren’t any oddities between Sale Price and TotalLivingArea.
 
 Zane: I am choosing the Acres variable.
 
@@ -214,13 +411,13 @@ max(ames$Acres, na.rm=TRUE)
 min(ames$Acres, na.rm=TRUE)
 ```
 
-    ## [1] 0.001
+    ## [1] 0.024
 
 ``` r
 mean(ames$Acres, na.rm=TRUE)
 ```
 
-    ## [1] 0.2358634
+    ## [1] 0.2660073
 
 ``` r
 ggplot(ames, aes(x = Acres)) + 
@@ -228,23 +425,13 @@ ggplot(ames, aes(x = Acres)) +
   ggtitle("binwidth = 0.1")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
-
-The distribution is heavily skewed right, with a minimum of 0.001 acres
-and a maximum of 4.65 acres. The mean acreage is 0.236.
-
-``` r
-ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
-  geom_point()
-```
-
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-Let’s filter out some of the outliers with high prices and low acreage.
+The distribution is heavily skewed right, with a minimum of 0.024 acres
+and a maximum of 4.65 acres. The mean acreage is 0.266.
 
 ``` r
-alt = ames %>% filter(`Sale Price` < 10000000)
-ggplot(alt, aes(x = Acres, y = `Sale Price`)) +
+ggplot(ames, aes(x = Acres, y = `Sale Price`, alpha = 0.2)) +
   geom_point()
 ```
 
@@ -252,8 +439,9 @@ ggplot(alt, aes(x = Acres, y = `Sale Price`)) +
 
 The majority of the residences in the scatterplot are clustered with low
 acreage and low to medium price. There is no clear correlation due to
-the extreme density of points. However, we can tell that it is a
-positive correlation between acreage and sale price.
+the extreme density of points. However, we can tell that there is a
+positive correlation between acreage and sale price.There are no obvious
+oddities between acreage and sale price.
 
 Ryan: I will look at Occupancy.
 
@@ -262,11 +450,11 @@ summary(ames$Occupancy)
 ```
 
     ##                    Condominium Single-Family / Owner Occupied 
-    ##                            570                           3108 
+    ##                              5                           2289 
     ##                      Townhouse          Two-Family Conversion 
-    ##                            428                             76 
+    ##                            347                             46 
     ##              Two-Family Duplex 
-    ##                             93
+    ##                             51
 
 There are 5 levels to this categorical variable: Condominium, Townhouse,
 Two-Family Duplex, Single-Family/Owner Occupied, Two-Family Conversion.
