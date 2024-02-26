@@ -363,7 +363,7 @@ ggplot(data = ames, aes(x = factor(YearBuilt), weight = `Sale Price`))  + geom_b
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-Relationship with the Main Variale( sale price):
+Relationship with the Main Variable( sale Price):
 
 ``` r
 ggplot(data = ames, aes(x = YearBuilt, y = log(`Sale Price`), alpha = 0.2)) +
@@ -371,6 +371,13 @@ ggplot(data = ames, aes(x = YearBuilt, y = log(`Sale Price`), alpha = 0.2)) +
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+Conclusion : By observing the Scatter plot, We came to know that there
+is some relationship between two variables sale price and YearBuilt. As
+the yearBuilt goes on increasing, the sale price slightly increasing
+showing the positive association. There are oddities between Sale Price
+and YearBuilt. It means at some years the sale price exponentially
+increased and decreased compare to other YearBuilt.
 
 Vinayak: I am doing the TotalLivingArea (sf) The range of this variable
 is:
