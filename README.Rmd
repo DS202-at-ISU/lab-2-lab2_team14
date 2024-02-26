@@ -25,13 +25,62 @@ Submit a link to your repository on Canvas (only one submission per team) to sig
 library(classdata)
 library(ggplot2)
 library(dplyr)
-df = ames %>% filter(YearBuilt!=0) %>% filter(`LotArea(sf)`!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Sale Price`!=0) %>% filter(Bedrooms!=0)
+df = ames %>% filter(YearBuilt!=0) %>% filter(`LotArea(sf)`!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Sale Price`!=0) %>% filter(Bedrooms!=0) %>% filter(Acres!=0) %>% filter(`TotalLivingArea (sf)`!=0) %>% filter(`Bedrooms` != 0) %>% filter(`FinishedBsmtArea (sf)`!=0) %>% filter(AC != 0) %>% filter(FirePlace != 0) %>% filter(Neighborhood != 0)
 ames = df
 summary(ames)
 head(ames)
 str(ames)
+
+class(df$Acres)
+min(df$Acres)
+max(df$Acres)
+
+class(df$`TotalLivingArea (sf)`)
+min(df$`TotalLivingArea (sf)`)
+max(df$`TotalLivingArea (sf)`)
+
+class(df$Bedrooms)
+min(df$Bedrooms)
+max(df$Bedrooms)
+
+class(df$`FinishedBsmtArea (sf)`)
+min(df$`FinishedBsmtArea (sf)`)
+max(df$`FinishedBsmtArea (sf)`)
+
+class(df$`LotArea(sf)`)
+min(df$`LotArea(sf)`)
+max(df$`LotArea(sf)`)
+
+class(df$AC)
+min(df$AC)
+max(df$AC)
+
+class(df$FirePlace)
+min(df$FirePlace)
+max(df$FirePlace)
+
+class(df$Neighborhood)
+
+
 ```
 The variables of the data set are: Parcel ID, Address, Style, Occupancy, Sale Date, Sale Price, Multi Sale, YearBuilt, Acres, TotalLivingArea (sf), Bedrooms, FinishedBsmtArea (sf), LotArea(sf), AC, FirePlace, and Neighborhood. That makes 17 variables, and we removed the rows with strange values of 0 for certain variables. Parcel ID is of type chr, and is a 10 digit number providing a unique ID to each residence. Address is of type chr, and is a string representing the location of the residence. Style is of type Factor, and represents the general size of the residence in stories. Occupancy is of type Factor, and represents the type of residence, such as Townhouse or Condominium. Sale date is of type date, represents the date the residence was sold, and go from 2017-07-03 to 2022-08-31. Sale price is of type num, represents the USD cost of the residence, and ranges from $1 to $20,500,000. Multi Sale is of type chr, and represents if the residence sale occurred with others. Most of these values are NA. YearBuilt is of type num, represents the year the residence was built, and ranges from 1880 to 2021.
+
+Acres represents the acerage of the properties, is of type 'double' and ranges from 0.001 to 4.65.
+TotalLivingArea represents the living area of the properties, is of type 'double' and ranges from 3 to 6007 sf.
+Bedrooms represents the number of bedrooms per property, is of type 'double', and ranges from 1 to 10.
+FinishedBsmtArea represents the basement area of each property, is of type 'double', and ranges from 16 to 2537 sf.
+LotArea represents the lot area of each property, is of type 'double', and ranges from 1037 to 202554.
+AC represents whether or not there is an AC in the property, is of type 'character', and is either No or Yes.
+Fireplace represents whether or not there is a fireplace on the property, is of type 'character', and is either Yes or No.
+Neighborhood represents the neighborhood of the property and is of type 'factor'.
+
+
+
+
+
+
+
+
 
 
 2. Is there a variable of special interest or focus?
