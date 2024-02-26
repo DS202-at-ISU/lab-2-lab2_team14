@@ -108,7 +108,35 @@ ggplot(alt, aes(x = Acres, y = `Sale Price`)) +
 The majority of the residences in the scatterplot are clustered with low acreage and low to medium price. There is no clear correlation due to the extreme density of points. However, we can tell that it is a positive correlation between acreage and sale price.
 
 
+Ryan: I will look at Occupancy.
+```{r }
+summary(ames$Occupancy)
+```
 
+There are 5 levels to this categorical variable: Condominium, Townhouse, Two-Family Duplex, Single-Family/Owner Occupied, Two-Family Conversion.
 
+```{r }
+ggplot(data = ames, aes(x = Occupancy)) +
+  geom_bar()
+```
 
+The vast majority of observations fall under Single-Family/Owner Occupied; fewer but still many observations are either Condominium or Townhouse; similarly few observations are Two-Family Conversion or Two-Family Duplex.
 
+```{r }
+options(scipen = 999)
+ggplot(data = ames) +
+  geom_boxplot(mapping = aes(x = `Sale Price`, y = Occupancy))
+options(scipen = 0)
+```
+
+Condominiums clearly contain the data points at the highest end of the range. Since the extreme relative values of Sale Price cause the other levels of Occupancy to lose a distinct shape, it's worth looking at an adjusted box plot to get a sense of the pattern.
+
+```{r }
+options(scipen = 999)
+ggplot(data = ames) +
+  geom_boxplot(mapping = aes(x = log(`Sale Price`), y = Occupancy)) +
+  labs(x = "Log of Sale Price")
+options(scipen = 0)
+```
+
+While applying a log transformation to Sale Price isn't perfect, it allows us to at least see the pattern in Occupancy's effect on Sale Price. In order from least to greatest median log Sale Price we have: Two-Family Conversion, Two-Family Duplex and Townhouse roughly equivalent, Single-Family/Owner Occupied, and finally Condominium. While the levels of Occupancy (apart from Condominium) don't seem to differ drastically in their effects on Sale Price, there is a small effect worth considering.
