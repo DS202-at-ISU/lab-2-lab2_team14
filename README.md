@@ -153,26 +153,39 @@ For this model, We are focusing on Sale Price.
     Is there anything odd? Follow up on any oddities in step 4.
 
 ``` r
+min(ames$'Sale Price')
+```
+
+    ## [1] 1
+
+``` r
 max(ames$'Sale Price')
 ```
 
     ## [1] 20500000
 
 ``` r
-ggplot(data = ames, aes(x = Occupancy)) +
-  geom_bar()
+options(scipen = 999) # Option to prevent scientific notation
+ggplot(ames, aes(x = `Sale Price`)) +
+  geom_histogram(bins = 30) +
+  labs(title = "Histogram of Sale Price",
+       x = "Sale Price",
+       y = "Frequency")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-The main variable “Sale Price” ranges from 0 to 20.5 million dollars.
-When making a bar chart for the categorical variable “Occupancy”, we can
-see that there is a relatively high count of Single-Family / Owner
-Occupied properties, which is in line with common sense. Condominium and
-Townhouse are similar in count, as are the two Two-Family levels. It
-could considered odd that there are a large number of NA properties,
-meaning our data has a significant number of missing values for this
-variable.
+``` r
+options(scipen = 0) # Resetting option to default
+```
+
+The main variable “Sale Price” ranges from 1 to 20.5 million dollars.
+When looking at a histogram of “Sale Price”, we see that the
+overwhelming majority of the data is contained within the first three
+bins, and the rest of the data is contained within two bins on the
+higher side of the range of “Sale Price”. It is odd that there are so
+many possible values for “Sale Price” that don’t have any observations
+to match, leaving us with a lot of empty space in the plot.
 
 4.  Pick a variable that might be related to the main variable. What is
     the range of that variable? Plot/describe the pattern. What is it’s
@@ -227,7 +240,7 @@ ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-Let’s filter out some of the outliers.
+Let’s filter out some of the outliers with high prices and low acreage.
 
 ``` r
 alt = ames %>% filter(`Sale Price` < 10000000)
@@ -241,3 +254,70 @@ The majority of the residences in the scatterplot are clustered with low
 acreage and low to medium price. There is no clear correlation due to
 the extreme density of points. However, we can tell that it is a
 positive correlation between acreage and sale price.
+
+Ryan: I will look at Occupancy.
+
+``` r
+summary(ames$Occupancy)
+```
+
+    ##                    Condominium Single-Family / Owner Occupied 
+    ##                            570                           3108 
+    ##                      Townhouse          Two-Family Conversion 
+    ##                            428                             76 
+    ##              Two-Family Duplex 
+    ##                             93
+
+There are 5 levels to this categorical variable: Condominium, Townhouse,
+Two-Family Duplex, Single-Family/Owner Occupied, Two-Family Conversion.
+
+``` r
+ggplot(data = ames, aes(x = Occupancy)) +
+  geom_bar()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+The vast majority of observations fall under Single-Family/Owner
+Occupied; fewer but still many observations are either Condominium or
+Townhouse; similarly few observations are Two-Family Conversion or
+Two-Family Duplex.
+
+``` r
+options(scipen = 999)
+ggplot(data = ames) +
+  geom_boxplot(mapping = aes(x = `Sale Price`, y = Occupancy))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+``` r
+options(scipen = 0)
+```
+
+Condominiums clearly contain the data points at the highest end of the
+range. Since the extreme relative values of Sale Price cause the other
+levels of Occupancy to lose a distinct shape, it’s worth looking at an
+adjusted box plot to get a sense of the pattern.
+
+``` r
+options(scipen = 999)
+ggplot(data = ames) +
+  geom_boxplot(mapping = aes(x = log(`Sale Price`), y = Occupancy)) +
+  labs(x = "Log of Sale Price")
+```
+
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+``` r
+options(scipen = 0)
+```
+
+While applying a log transformation to Sale Price isn’t perfect, it
+allows us to at least see the pattern in Occupancy’s effect on Sale
+Price. In order from least to greatest median log Sale Price we have:
+Two-Family Conversion, Two-Family Duplex and Townhouse roughly
+equivalent, Single-Family/Owner Occupied, and finally Condominium. While
+the levels of Occupancy (apart from Condominium) don’t seem to differ
+drastically in their effects on Sale Price, there is a small effect
+worth considering.
