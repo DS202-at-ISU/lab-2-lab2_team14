@@ -58,24 +58,20 @@ Range of the YearBuild:
 ```{r, include=FALSE}
 
 library(tidyverse)
-library(classdata)
 library(ggplot2)
-max(ames$`YearBuild `, na.rm = TRUE)
-min(ames$`YearBuild `, na.rm = TRUE)
-ggplot(data = ames, aes(x = factor(YearBuilt)))  + geom_bar() + labs(x = "Year Built")
+
+range(as.numeric(as.character(ames$YearBuilt)), na.rm = TRUE)
+
+ggplot(data = ames, aes(x = factor(YearBuilt), weight = `Sale Price`))  + geom_bar() + labs(x = 'Year Built') + coord_flip()
 
 ```
   
 Relationship with the Main Variale( sale price):
 
 ```{r, include=FALSE}
-library(tidyverse)
-library(classdata)
-library(ggplot2)
 
-ggplot(data = ames, aes(x = 'YearBuilt', y = `Sale Price`)) +
-  geom_point() +
-  labs(x = 'Year Built', y = 'Sale Price') +  coord_flip()
+ggplot(data = ames, aes(x = YearBuilt, y = log(`Sale Price`), alpha = 0.2)) +
+  geom_point()
 
 ```
 

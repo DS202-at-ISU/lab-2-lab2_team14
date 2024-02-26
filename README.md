@@ -182,7 +182,11 @@ variable.
     discovered in 3? Identify/follow-up on any oddities.
 
 Niraj: I am choosing the YearBulit variable as my secondary variable to
-explore with sales variable. The range of YearBuild variable is 2022.
+explore with sales variable.
+
+Range of the YearBuild:
+
+Relationship with the Main Variale( sale price):
 
 Vinayak: I am doing the TotalLivingArea (sf) The range of this variable
 is:
