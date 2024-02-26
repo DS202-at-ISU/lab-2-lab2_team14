@@ -227,7 +227,7 @@ ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-Let’s filter out some of the outliers.
+Let’s filter out some of the outliers with high prices and low acreage.
 
 ``` r
 alt = ames %>% filter(`Sale Price` < 10000000)
