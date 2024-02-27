@@ -6,8 +6,8 @@
 **TL;DR** Sales price is the most important variable, and follows a
 linear relationship with Total Living Area. Acres and Sales Price also
 follow a linear relationship, albeit with a much lower strength.
-Occupancy does have a slight effect on the Sales Price, but it doesn’t
-appear to be as significant as other explanatory variables.
+Occupancy does have an effect on Sale Price, given the differing
+boxplots for each level.
 
 Follow the instructions posted at
 <https://ds202-at-isu.github.io/labs.html> for the lab assignment. The
@@ -330,13 +330,13 @@ ggplot(ames, aes(x = `Sale Price`)) +
 options(scipen = 0) # Resetting option to default
 ```
 
-The main variable “Sale Price” ranges from 1 to 20.5 million dollars.
-When looking at a histogram of “Sale Price”, we see that the
-overwhelming majority of the data is contained within the first three
-bins, and the rest of the data is contained within two bins on the
-higher side of the range of “Sale Price”. It is odd that there are so
-many possible values for “Sale Price” that don’t have any observations
-to match, leaving us with a lot of empty space in the plot.
+The main variable “Sale Price” ranges from 1 dollar to 1.2 million
+dollars. When looking at a histogram of “Sale Price”, we see that the
+data has a unimodal shape with a slight right skew. There are some
+outliers towards the higher end of the range, suggesting that our data
+has values that could potentially alter further analysis. Besides those
+outliers, most of the data seems to be distributed close to the mean,
+which is around 250 thousand dollars.
 
 4.  Pick a variable that might be related to the main variable. What is
     the range of that variable? Plot/describe the pattern. What is it’s
@@ -484,9 +484,9 @@ ggplot(data = ames, aes(x = Occupancy)) +
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 The vast majority of observations fall under Single-Family/Owner
-Occupied; fewer but still many observations are either Condominium or
-Townhouse; similarly few observations are Two-Family Conversion or
-Two-Family Duplex.
+Occupied; there are a fewer but still a good amount of Townhouses;
+Two-Family Conversion and Two-Family Duplex have similarly small
+frequencies; Condominium is clearly the least represented group.
 
 ``` r
 options(scipen = 999)
@@ -500,29 +500,12 @@ ggplot(data = ames) +
 options(scipen = 0)
 ```
 
-Condominiums clearly contain the data points at the highest end of the
-range. Since the extreme relative values of Sale Price cause the other
-levels of Occupancy to lose a distinct shape, it’s worth looking at an
-adjusted box plot to get a sense of the pattern.
-
-``` r
-options(scipen = 999)
-ggplot(data = ames) +
-  geom_boxplot(mapping = aes(x = log(`Sale Price`), y = Occupancy)) +
-  labs(x = "Log of Sale Price")
-```
-
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
-
-``` r
-options(scipen = 0)
-```
-
-While applying a log transformation to Sale Price isn’t perfect, it
-allows us to at least see the pattern in Occupancy’s effect on Sale
-Price. In order from least to greatest median log Sale Price we have:
+In order from least to greatest median Sale Price we have: Condominium,
 Two-Family Conversion, Two-Family Duplex and Townhouse roughly
-equivalent, Single-Family/Owner Occupied, and finally Condominium. While
-the levels of Occupancy (apart from Condominium) don’t seem to differ
-drastically in their effects on Sale Price, there is a small effect
-worth considering.
+equivalent, and Single-Family/Owner Occupied. Apart from Condominium,
+each level of Occupancy has outliers on the high end.
+Single-Family/Owner Occupied is the biggest culprit of this, with a
+significant number of these high-end outliers. This are likely to be
+related to the outliers seen in the original histogram of Sale Price.
+Because each of the boxplots are different, we can say that Occupancy
+does have an effect on Sale Price.
