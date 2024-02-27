@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Lab report #1
 
-**TL;DR** Sales price is the most important variable, and follows a linear relationship with Total Living Area. Acres and Sales Price also follow a linear relationship, albeit with a much lower strength. Occupancy does have an effect on Sale Price, given the differing boxplots for each level.
+**TL;DR** Sales price is the most important variable, and follows a linear relationship with Total Living Area. Acres and Sales Price also follow a linear relationship, albeit with a much lower strength. Occupancy does have an effect on Sale Price, given the differing boxplots for each level. Total Living Area and Sales Price are positively correlated.
 
 Follow the instructions posted at https://ds202-at-isu.github.io/labs.html for the lab assignment. The work is meant to be finished during the lab time, but you have time until Monday evening to polish things.
 
